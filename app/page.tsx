@@ -1,546 +1,223 @@
 'use client'
 
-import { useState } from 'react'
-
-const content = {
-  fa: {
-    dir: 'rtl',
-    lang: 'fa',
-    nav: { title: 'کانون کتاب' },
-    hero: {
-      eyebrow: 'پورتال پروژه‌ها',
-      heading: 'Book Hub',
-      sub: 'فضایی برای ایده‌هایی که به نرم‌افزار تبدیل شدند.',
-    },
-    projects: 'پروژه‌ها',
-    web: 'طراحی وب',
-    projectList: [
-      {
-        id: 'ketabkhaneh',
-        tag: 'پلتفرم کتاب',
-        tagColor: 'accent',
-        title: 'کتابخانه',
-        subtitle: 'پلتفرم اشتراک‌گذاری کتاب',
-        desc: 'فضایی برای خرید، فروش، هدیه‌دادن، هدیه‌گرفتن و قرض کتاب. کاربران می‌توانند کتاب‌هایشان را ثبت کنند و با دیگران به اشتراک بگذارند.',
-        features: ['خرید و فروش', 'هدیه کتاب', 'قرض کتاب', 'جستجوی پیشرفته'],
-        link: 'https://app.book-hub.org',
-        linkText: 'ورود به پلتفرم',
-        highlight: true,
-      },
-      {
-        id: 'iran',
-        tag: 'مانیتورینگ',
-        tagColor: 'warm',
-        title: 'Iran Net Monitor',
-        subtitle: 'بررسی وضعیت اینترنت ایران',
-        desc: 'ابزاری برای مانیتورینگ لحظه‌ای وضعیت دسترسی به اینترنت در ایران. راهنمایی برای ارتباط با خانواده در شرایط قطعی اینترنت.',
-        features: ['مانیتورینگ زنده', 'راهنمای ارتباط', 'اسکریپت خودکار', 'منابع معتبر'],
-        link: 'https://iran.book-hub.org',
-        linkText: 'مشاهده وضعیت',
-        highlight: false,
-      },
-    ],
-    webList: [
-      {
-        title: 'Luxussmooth',
-        desc: 'سالن لیزر و زیبایی در فرانکفورت — طراحی وبسایت حرفه‌ای',
-        location: 'Frankfurt, DE',
-        link: 'https://luxussmooth.de/',
-      },
-      {
-        title: 'Iranian Film Festival Frankfurt',
-        desc: 'جشنواره فیلم ایرانی فرانکفورت — طراحی وبسایت رویداد',
-        location: 'Frankfurt, DE',
-        link: 'https://iranian-filmfestival-frankfurt.com/',
-      },
-      {
-        title: 'Tattooing Baba',
-        desc: 'استودیو تاتو در آلمان — طراحی وبسایت هنری',
-        location: 'Germany, DE',
-        link: 'https://tattooingbaba.de/',
-      },
-    ],
-    footer: 'Book Hub · ساخته شده با ❤️',
-  },
-  de: {
-    dir: 'ltr',
-    lang: 'de',
-    nav: { title: 'Book Hub' },
-    hero: {
-      eyebrow: 'Projekt-Portal',
-      heading: 'Book Hub',
-      sub: 'Ein Raum für Ideen, die zu Software wurden.',
-    },
-    projects: 'Projekte',
-    web: 'Webdesign',
-    projectList: [
-      {
-        id: 'ketabkhaneh',
-        tag: 'Buchplattform',
-        tagColor: 'accent',
-        title: 'Ketabkhaneh',
-        subtitle: 'Buchsharing-Plattform',
-        desc: 'Eine Plattform zum Kaufen, Verkaufen, Verschenken, Empfangen und Verleihen von Büchern. Nutzer können ihre Bücher registrieren und mit anderen teilen.',
-        features: ['Kaufen & Verkaufen', 'Bücher verschenken', 'Bücher leihen', 'Erweiterte Suche'],
-        link: 'https://app.book-hub.org',
-        linkText: 'Zur Plattform',
-        highlight: true,
-      },
-      {
-        id: 'iran',
-        tag: 'Monitoring',
-        tagColor: 'warm',
-        title: 'Iran Net Monitor',
-        subtitle: 'Internet-Status in Iran',
-        desc: 'Ein Echtzeit-Monitoring-Tool für den Internetzugang im Iran. Kommunikationsleitfaden für den Kontakt zur Familie bei Internetausfällen.',
-        features: ['Live-Monitoring', 'Kommunikationsguide', 'Auto-Skript', 'Verlässliche Quellen'],
-        link: 'https://iran.book-hub.org',
-        linkText: 'Status anzeigen',
-        highlight: false,
-      },
-    ],
-    webList: [
-      {
-        title: 'Luxussmooth',
-        desc: 'Laser- und Beautysalon in Frankfurt — Professionelles Webdesign',
-        location: 'Frankfurt, DE',
-        link: 'https://luxussmooth.de/',
-      },
-      {
-        title: 'Iranian Film Festival Frankfurt',
-        desc: 'Iranisches Filmfestival Frankfurt — Event-Webdesign',
-        location: 'Frankfurt, DE',
-        link: 'https://iranian-filmfestival-frankfurt.com/',
-      },
-      {
-        title: 'Tattooing Baba',
-        desc: 'Tattoo-Studio in Deutschland — Künstlerisches Webdesign',
-        location: 'Germany, DE',
-        link: 'https://tattooingbaba.de/',
-      },
-    ],
-    footer: 'Book Hub · Mit ❤️ gebaut',
-  },
-  en: {
-    dir: 'ltr',
-    lang: 'en',
-    nav: { title: 'Book Hub' },
-    hero: {
-      eyebrow: 'Projects Portal',
-      heading: 'Book Hub',
-      sub: 'A space for ideas that became software.',
-    },
-    projects: 'Projects',
-    web: 'Web Design',
-    projectList: [
-      {
-        id: 'ketabkhaneh',
-        tag: 'Book Platform',
-        tagColor: 'accent',
-        title: 'Ketabkhaneh',
-        subtitle: 'Book Sharing Platform',
-        desc: 'A platform for buying, selling, gifting, receiving, and lending books. Users can register their books and share them with others.',
-        features: ['Buy & Sell', 'Gift Books', 'Lend Books', 'Advanced Search'],
-        link: 'https://app.book-hub.org',
-        linkText: 'Open Platform',
-        highlight: true,
-      },
-      {
-        id: 'iran',
-        tag: 'Monitoring',
-        tagColor: 'warm',
-        title: 'Iran Net Monitor',
-        subtitle: 'Iran Internet Status Monitor',
-        desc: 'A real-time monitoring tool for internet access in Iran. Communication guide for staying in touch with family during internet disruptions.',
-        features: ['Live Monitoring', 'Communication Guide', 'Auto Script', 'Reliable Sources'],
-        link: 'https://iran.book-hub.org',
-        linkText: 'View Status',
-        highlight: false,
-      },
-    ],
-    webList: [
-      {
-        title: 'Luxussmooth',
-        desc: 'Laser & beauty salon in Frankfurt — Professional web design',
-        location: 'Frankfurt, DE',
-        link: 'https://luxussmooth.de/',
-      },
-      {
-        title: 'Iranian Film Festival Frankfurt',
-        desc: 'Iranian Film Festival Frankfurt — Event website design',
-        location: 'Frankfurt, DE',
-        link: 'https://iranian-filmfestival-frankfurt.com/',
-      },
-      {
-        title: 'Tattooing Baba',
-        desc: 'Tattoo studio in Germany — Artistic web design',
-        location: 'Germany, DE',
-        link: 'https://tattooingbaba.de/',
-      },
-    ],
-    footer: 'Book Hub · Built with ❤️',
-  },
-}
+import { useState, useEffect } from 'react'
+import { PROJECTS, WEB_PROJECTS } from '../projects.config'
 
 type Lang = 'fa' | 'de' | 'en'
 
+const UI = {
+  fa: { dir: 'rtl', eyebrow: 'پورتال پروژه‌ها', heroLine1: 'کانون', heroLine2: 'کتاب', heroSub: 'فضایی برای ایده‌هایی که به نرم‌افزار تبدیل شدند', scroll: 'اسکرول', s1: 'پروژه‌ها', s2: 'طراحی وب' },
+  de: { dir: 'ltr', eyebrow: 'Projekt-Portal', heroLine1: 'Book', heroLine2: 'Hub', heroSub: 'Ein Raum für Ideen, die zu Software wurden', scroll: 'Scrollen', s1: 'Projekte', s2: 'Webdesign' },
+  en: { dir: 'ltr', eyebrow: 'Projects Portal', heroLine1: 'Book', heroLine2: 'Hub', heroSub: 'A space for ideas that became software', scroll: 'Scroll', s1: 'Projects', s2: 'Web Design' },
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>('fa')
-  const t = content[lang]
-  const isRtl = t.dir === 'rtl'
+  const [scrolled, setScrolled] = useState(false)
+  const [mouse, setMouse] = useState({ x: 0, y: 0 })
+
+  const ui = UI[lang]
+  const isRtl = ui.dir === 'rtl'
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    const onMouse = (e: MouseEvent) => setMouse({ x: e.clientX, y: e.clientY })
+    window.addEventListener('scroll', onScroll)
+    window.addEventListener('mousemove', onMouse)
+    return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('mousemove', onMouse) }
+  }, [])
+
+  const arrowPath = isRtl
+    ? <><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>
+    : <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>
 
   return (
-    <div
-      dir={t.dir}
-      style={{ fontFamily: isRtl ? "'Vazirmatn', sans-serif" : "'DM Sans', sans-serif" }}
-      className="min-h-screen"
-    >
+    <div dir={ui.dir} style={{ background: '#fff', minHeight: '100vh', fontFamily: isRtl ? "'Vazirmatn', sans-serif" : "'DM Sans', sans-serif", color: '#0a0a0a', overflowX: 'hidden' }}>
       <style>{`
-        :root {
-          --cream: #faf8f4;
-          --ink: #18181b;
-          --warm: #b8924a;
-          --warm-light: #f5ede0;
-          --soft: #71706b;
-          --accent: #2c5f4a;
-          --accent-light: #e6f2ed;
-          --border: #e8e2da;
-        }
-        * { box-sizing: border-box; }
-        body { background: var(--cream); margin: 0; }
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Vazirmatn:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Vazirmatn:wght@300;400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap');
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 2px; }
+        ::-webkit-scrollbar-thumb { background: #0a0a0a; }
 
-        .fade-in { animation: fadeUp 0.6s ease both; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(18px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .card-hover {
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
-        .card-hover:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 20px 48px rgba(0,0,0,0.1);
-        }
-        .lang-btn { transition: all 0.2s ease; }
-        .lang-btn:hover { background: var(--warm-light); color: var(--warm); }
-        .lang-btn.active { background: var(--ink); color: #fff; }
-        .arrow-link { transition: transform 0.2s; display: inline-block; }
-        .arrow-link:hover { transform: translateX(${isRtl ? '-4px' : '4px'}); }
-        .section-line {
-          width: 40px; height: 2px;
-          background: var(--warm);
-          display: inline-block;
-          vertical-align: middle;
-          margin: 0 12px;
-        }
-        .web-card { transition: background 0.2s ease; }
-        .web-card:hover { background: var(--warm-light); }
-        .highlight-ring {
-          box-shadow: 0 0 0 2px var(--accent), 0 12px 40px rgba(44,95,74,0.12);
+        .cursor-glow { position: fixed; pointer-events: none; z-index: 0; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0.035) 0%, transparent 65%); transform: translate(-50%,-50%); transition: left .5s ease, top .5s ease; }
+
+        .nav { position: fixed; top:0; left:0; right:0; z-index:100; padding:0 48px; height:64px; display:flex; align-items:center; justify-content:space-between; transition:all .4s ease; }
+        .nav.scrolled { background:rgba(255,255,255,.96); backdrop-filter:blur(20px); border-bottom:1px solid rgba(0,0,0,.05); }
+        .nav-logo { font-family:'Bebas Neue',cursive; font-size:22px; letter-spacing:.1em; color:#0a0a0a; }
+        .lang-group { display:flex; gap:2px; }
+        .lang-pill { border:1px solid rgba(0,0,0,.1); background:transparent; color:rgba(0,0,0,.35); font-size:11px; font-weight:600; letter-spacing:.08em; padding:5px 12px; border-radius:999px; cursor:pointer; transition:all .2s ease; font-family:inherit; }
+        .lang-pill:hover { border-color:#0a0a0a; color:#0a0a0a; }
+        .lang-pill.active { background:#0a0a0a; color:#fff; border-color:#0a0a0a; }
+
+        .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 48px 80px; position:relative; overflow:hidden; }
+        .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.04) 1px,transparent 1px); background-size:80px 80px; -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
+        .hero-eyebrow { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:rgba(0,0,0,.3); margin-bottom:20px; display:flex; align-items:center; gap:14px; animation:fadeUp .8s ease both .1s; }
+        .hero-eyebrow::before { content:''; display:block; width:32px; height:1px; background:rgba(0,0,0,.25); flex-shrink:0; }
+        .hero-title { font-family:'Bebas Neue',cursive; font-size:clamp(96px,17vw,230px); line-height:.88; letter-spacing:-.01em; color:#0a0a0a; position:relative; z-index:1; animation:fadeUp .8s ease both .2s; }
+        .hero-title .outline { -webkit-text-stroke:2px #0a0a0a; color:transparent; }
+        .hero-bottom { display:flex; align-items:flex-end; justify-content:space-between; margin-top:48px; gap:40px; animation:fadeUp .8s ease both .35s; }
+        .hero-sub { font-size:16px; color:rgba(0,0,0,.4); max-width:380px; line-height:1.75; font-weight:300; }
+        .hero-scroll { display:flex; flex-direction:column; align-items:center; gap:10px; color:rgba(0,0,0,.25); font-size:10px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; flex-shrink:0; }
+        .scroll-line { width:1px; height:52px; background:linear-gradient(to bottom,rgba(0,0,0,.3),transparent); animation:pulse 2.2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.3;transform:scaleY(.6)} }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+        .section { padding:120px 48px; }
+        .section-inner { max-width:1200px; margin:0 auto; }
+        .section-header { display:flex; align-items:center; gap:18px; margin-bottom:64px; }
+        .section-num { font-family:'Bebas Neue',cursive; font-size:13px; letter-spacing:.15em; color:rgba(0,0,0,.18); }
+        .section-label { font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:rgba(0,0,0,.3); }
+        .section-rule { flex:1; height:1px; background:rgba(0,0,0,.07); }
+
+        .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:2px; }
+
+        .pcard { position:relative; background:#fff; border:1px solid rgba(0,0,0,.06); padding:48px; overflow:hidden; text-decoration:none; color:inherit; display:block; }
+        .pcard::before { content:''; position:absolute; inset:0; background:#0a0a0a; transform:translateY(102%); transition:transform .55s cubic-bezier(.76,0,.24,1); z-index:0; }
+        .pcard:hover::before { transform:translateY(0); }
+        .pcard-inner { position:relative; z-index:1; }
+        .pcard-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:36px; }
+        .pcard-num { font-family:'Bebas Neue',cursive; font-size:80px; line-height:1; color:rgba(0,0,0,.05); letter-spacing:-.02em; transition:color .3s ease; }
+        .pcard:hover .pcard-num { color:rgba(255,255,255,.08); }
+        .pcard-tag { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:999px; border:1px solid rgba(0,0,0,.09); color:rgba(0,0,0,.35); transition:all .3s ease; white-space:nowrap; }
+        .pcard:hover .pcard-tag { border-color:rgba(255,255,255,.15); color:rgba(255,255,255,.5); }
+        .pcard-title { font-family:'Bebas Neue',cursive; font-size:60px; line-height:.92; color:#0a0a0a; margin-bottom:6px; transition:color .3s ease; }
+        .pcard:hover .pcard-title { color:#fff; }
+        .pcard-en { font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:600; color:rgba(0,0,0,.25); margin-bottom:24px; transition:color .3s ease; }
+        .pcard:hover .pcard-en { color:rgba(255,255,255,.3); }
+        .pcard-desc { font-size:15px; line-height:1.8; color:rgba(0,0,0,.45); margin-bottom:28px; font-weight:300; transition:color .3s ease; }
+        .pcard:hover .pcard-desc { color:rgba(255,255,255,.6); }
+        .pcard-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:40px; }
+        .pcard-chip { font-size:10px; letter-spacing:.06em; padding:4px 10px; border-radius:3px; border:1px solid rgba(0,0,0,.08); color:rgba(0,0,0,.35); transition:all .3s ease; }
+        .pcard:hover .pcard-chip { border-color:rgba(255,255,255,.12); color:rgba(255,255,255,.4); }
+        .pcard-cta { display:inline-flex; align-items:center; gap:10px; background:#0a0a0a; color:#fff; padding:13px 24px; border-radius:3px; font-size:13px; font-weight:600; letter-spacing:.04em; transition:all .3s ease; }
+        .pcard:hover .pcard-cta { background:#fff; color:#0a0a0a; }
+        .pcard-arrow { width:15px; height:15px; transition:transform .3s ease; }
+        .pcard:hover .pcard-arrow { transform:translateX(${isRtl ? '-4px' : '4px'}); }
+
+        .web-list { border-top:1px solid rgba(0,0,0,.07); }
+        .witem { display:flex; align-items:center; justify-content:space-between; padding:26px 0; border-bottom:1px solid rgba(0,0,0,.07); text-decoration:none; color:inherit; position:relative; transition:padding-inline-start .35s ease; }
+        .witem::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px; background:#0a0a0a; transform:scaleX(0); transform-origin:${isRtl ? 'right' : 'left'}; transition:transform .45s cubic-bezier(.76,0,.24,1); }
+        .witem:hover::after { transform:scaleX(1); }
+        .witem:hover { padding-inline-start:20px; }
+        .witem-left { display:flex; align-items:center; gap:24px; }
+        .witem-num { font-family:'Bebas Neue',cursive; font-size:13px; letter-spacing:.12em; color:rgba(0,0,0,.15); min-width:26px; }
+        .witem-name { font-family:'Bebas Neue',cursive; font-size:30px; letter-spacing:.02em; color:#0a0a0a; transition:letter-spacing .35s ease; }
+        .witem:hover .witem-name { letter-spacing:.07em; }
+        .witem-desc { font-size:13px; color:rgba(0,0,0,.3); transition:color .3s ease; }
+        .witem:hover .witem-desc { color:rgba(0,0,0,.6); }
+        .witem-arrow { width:20px; height:20px; opacity:.15; transition:opacity .3s ease,transform .3s ease; flex-shrink:0; }
+        .witem:hover .witem-arrow { opacity:1; transform:translateX(${isRtl ? '-6px' : '6px'}); }
+
+        .footer { padding:40px 48px; border-top:1px solid rgba(0,0,0,.06); display:flex; align-items:center; justify-content:space-between; }
+        .footer-logo { font-family:'Bebas Neue',cursive; font-size:17px; letter-spacing:.12em; color:rgba(0,0,0,.18); }
+        .footer-url { font-size:11px; color:rgba(0,0,0,.18); letter-spacing:.08em; }
+
+        @media(max-width:768px){
+          .nav{padding:0 20px}
+          .hero{padding:0 20px 56px}
+          .hero-title{font-size:clamp(72px,20vw,120px)}
+          .section{padding:72px 20px}
+          .pcard{padding:28px 24px}
+          .projects-grid{grid-template-columns:1fr}
+          .footer{padding:28px 20px;flex-direction:column;gap:10px}
         }
       `}</style>
 
-      {/* NAV */}
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(250,248,244,0.92)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '0 24px',
-      }}>
-        <div style={{
-          maxWidth: 1000, margin: '0 auto',
-          display: 'flex', alignItems: 'center',
-          justifyContent: 'space-between',
-          height: 60,
-        }}>
-          <span style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 20,
-            fontWeight: 700,
-            color: 'var(--ink)',
-            letterSpacing: '-0.02em',
-          }}>
-            Book Hub
-          </span>
+      {/* Cursor glow */}
+      <div className="cursor-glow" style={{ left: mouse.x, top: mouse.y }} />
 
-          {/* Lang switcher */}
-          <div style={{ display: 'flex', gap: 4, background: '#efe9e0', borderRadius: 999, padding: 4 }}>
-            {(['fa', 'de', 'en'] as Lang[]).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                className={`lang-btn ${lang === l ? 'active' : ''}`}
-                style={{
-                  border: 'none', cursor: 'pointer',
-                  padding: '4px 14px', borderRadius: 999,
-                  fontSize: 13, fontWeight: 500,
-                  background: lang === l ? 'var(--ink)' : 'transparent',
-                  color: lang === l ? '#fff' : 'var(--soft)',
-                }}
-              >
-                {l.toUpperCase()}
-              </button>
-            ))}
-          </div>
+      {/* NAV */}
+      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+        <span className="nav-logo">Book Hub</span>
+        <div className="lang-group">
+          {(['fa', 'de', 'en'] as Lang[]).map(l => (
+            <button key={l} className={`lang-pill ${lang === l ? 'active' : ''}`} onClick={() => setLang(l)}>
+              {l.toUpperCase()}
+            </button>
+          ))}
         </div>
       </nav>
 
       {/* HERO */}
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '80px 24px 64px' }}>
-        <div className="fade-in">
-          <div style={{
-            display: 'inline-block',
-            background: 'var(--warm-light)',
-            color: 'var(--warm)',
-            fontSize: 12,
-            fontWeight: 600,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            padding: '4px 14px',
-            borderRadius: 999,
-            marginBottom: 24,
-          }}>
-            {t.hero.eyebrow}
-          </div>
-          <h1 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 'clamp(42px, 8vw, 80px)',
-            fontWeight: 700,
-            color: 'var(--ink)',
-            letterSpacing: '-0.03em',
-            lineHeight: 1.05,
-            marginBottom: 20,
-          }}>
-            {t.hero.heading}
-          </h1>
-          <p style={{
-            fontSize: 18,
-            color: 'var(--soft)',
-            maxWidth: 480,
-            lineHeight: 1.7,
-          }}>
-            {t.hero.sub}
-          </p>
+      <section className="hero">
+        <div className="hero-grid" />
+        <div className="hero-eyebrow">{ui.eyebrow}</div>
+        <div className="hero-title">
+          <div>{ui.heroLine1}</div>
+          <div className="outline">{ui.heroLine2}</div>
         </div>
-
-        {/* Decorative bar */}
-        <div style={{
-          marginTop: 48,
-          height: 1,
-          background: 'linear-gradient(to right, var(--warm), transparent)',
-        }} />
+        <div className="hero-bottom">
+          <p className="hero-sub">{ui.heroSub}</p>
+          <div className="hero-scroll">
+            <div className="scroll-line" />
+            <span>{ui.scroll}</span>
+          </div>
+        </div>
       </section>
 
       {/* PROJECTS */}
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '0 24px 80px' }}>
-        <h2 style={{
-          fontSize: 13,
-          fontWeight: 600,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--soft)',
-          marginBottom: 32,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-        }}>
-          <span style={{ display: 'inline-block', width: 32, height: 2, background: 'var(--warm)' }} />
-          {t.projects}
-        </h2>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
-          {t.projectList.map((proj, i) => (
-            <div
-              key={proj.id}
-              className={`card-hover fade-in ${proj.highlight ? 'highlight-ring' : ''}`}
-              style={{
-                animationDelay: `${i * 0.12}s`,
-                background: proj.highlight ? '#fff' : '#fff',
-                borderRadius: 20,
-                padding: 32,
-                border: proj.highlight ? 'none' : '1px solid var(--border)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-              }}
-            >
-              {/* Tag */}
-              <span style={{
-                display: 'inline-block',
-                background: proj.tagColor === 'accent' ? 'var(--accent-light)' : 'var(--warm-light)',
-                color: proj.tagColor === 'accent' ? 'var(--accent)' : 'var(--warm)',
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                padding: '3px 12px',
-                borderRadius: 999,
-                alignSelf: 'flex-start',
-              }}>
-                {proj.tag}
-              </span>
-
-              {/* Title */}
-              <div>
-                <h3 style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 26,
-                  fontWeight: 700,
-                  color: 'var(--ink)',
-                  letterSpacing: '-0.02em',
-                  marginBottom: 4,
-                }}>
-                  {proj.title}
-                </h3>
-                <p style={{ fontSize: 13, color: 'var(--soft)', fontWeight: 500 }}>
-                  {proj.subtitle}
-                </p>
-              </div>
-
-              {/* Desc */}
-              <p style={{ fontSize: 15, color: 'var(--soft)', lineHeight: 1.75, flexGrow: 1 }}>
-                {proj.desc}
-              </p>
-
-              {/* Features */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                {proj.features.map((f) => (
-                  <span key={f} style={{
-                    background: 'var(--cream)',
-                    border: '1px solid var(--border)',
-                    borderRadius: 999,
-                    padding: '3px 12px',
-                    fontSize: 12,
-                    color: 'var(--soft)',
-                  }}>
-                    {f}
+      <section className="section" style={{ background: '#f9f9f9' }}>
+        <div className="section-inner">
+          <div className="section-header">
+            <span className="section-num">01</span>
+            <span className="section-label">{ui.s1}</span>
+            <div className="section-rule" />
+          </div>
+          <div className="projects-grid">
+            {PROJECTS.map((proj, i) => (
+              <a key={proj.id} href={proj.link} target="_blank" rel="noopener noreferrer" className="pcard">
+                <div className="pcard-inner">
+                  <div className="pcard-top">
+                    <span className="pcard-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="pcard-tag">{proj.label[lang]}</span>
+                  </div>
+                  <div className="pcard-title">{proj.title[lang]}</div>
+                  <div className="pcard-en">{proj.titleSub}</div>
+                  <p className="pcard-desc">{proj.desc[lang]}</p>
+                  <div className="pcard-tags">
+                    {proj.tags[lang].map(tag => <span key={tag} className="pcard-chip">{tag}</span>)}
+                  </div>
+                  <span className="pcard-cta">
+                    {proj.cta[lang]}
+                    <svg className="pcard-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{arrowPath}</svg>
                   </span>
-                ))}
-              </div>
-
-              {/* CTA */}
-              <a
-                href={proj.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  marginTop: 4,
-                  background: proj.highlight ? 'var(--accent)' : 'var(--ink)',
-                  color: '#fff',
-                  borderRadius: 12,
-                  padding: '10px 20px',
-                  fontSize: 14,
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  transition: 'opacity 0.2s',
-                  alignSelf: 'flex-start',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.85')}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-              >
-                {proj.linkText}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  {isRtl
-                    ? <><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>
-                    : <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>
-                  }
-                </svg>
+                </div>
               </a>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* WEB DESIGN */}
-      <section style={{ maxWidth: 1000, margin: '0 auto', padding: '0 24px 96px' }}>
-        <h2 style={{
-          fontSize: 13,
-          fontWeight: 600,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color: 'var(--soft)',
-          marginBottom: 32,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-        }}>
-          <span style={{ display: 'inline-block', width: 32, height: 2, background: 'var(--warm)' }} />
-          {t.web}
-        </h2>
-
-        <div style={{
-          background: '#fff',
-          borderRadius: 20,
-          border: '1px solid var(--border)',
-          overflow: 'hidden',
-        }}>
-          {t.webList.map((site, i) => (
-            <a
-              key={site.title}
-              href={site.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="web-card"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '22px 28px',
-                borderBottom: i < t.webList.length - 1 ? '1px solid var(--border)' : 'none',
-                textDecoration: 'none',
-                color: 'inherit',
-              }}
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                  <span style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: 18,
-                    fontWeight: 600,
-                    color: 'var(--ink)',
-                  }}>
-                    {site.title}
-                  </span>
-                  <span style={{
-                    fontSize: 11,
-                    background: 'var(--warm-light)',
-                    color: 'var(--warm)',
-                    padding: '2px 10px',
-                    borderRadius: 999,
-                    fontWeight: 600,
-                  }}>
-                    {site.location}
-                  </span>
+      <section className="section">
+        <div className="section-inner">
+          <div className="section-header">
+            <span className="section-num">02</span>
+            <span className="section-label">{ui.s2}</span>
+            <div className="section-rule" />
+          </div>
+          <div className="web-list">
+            {WEB_PROJECTS.map((site, i) => (
+              <a key={site.title} href={site.link} target="_blank" rel="noopener noreferrer" className="witem">
+                <div className="witem-left">
+                  <span className="witem-num">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <div className="witem-name">{site.title}</div>
+                    <div className="witem-desc">{site.desc[lang]}</div>
+                  </div>
                 </div>
-                <p style={{ fontSize: 14, color: 'var(--soft)', margin: 0 }}>
-                  {site.desc}
-                </p>
-              </div>
-              <div className="arrow-link" style={{ marginInlineStart: 16, flexShrink: 0 }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" strokeWidth="2">
-                  {isRtl
-                    ? <><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></>
-                    : <><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></>
-                  }
-                </svg>
-              </div>
-            </a>
-          ))}
+                <svg className="witem-arrow" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" strokeWidth="1.5">{arrowPath}</svg>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{
-        borderTop: '1px solid var(--border)',
-        padding: '28px 24px',
-        textAlign: 'center',
-      }}>
-        <p style={{ fontSize: 13, color: 'var(--soft)' }}>{t.footer}</p>
+      <footer className="footer">
+        <span className="footer-logo">Book Hub</span>
+        <span className="footer-url">book-hub.org</span>
       </footer>
     </div>
   )
